@@ -71,12 +71,14 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(SolutionDir)OpenCV\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)OpenCV\x64\vc16\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)OpenCV\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)OpenCV\x64\vc16\lib;$(LibraryPath)</LibraryPath>
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\output\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)OpenCV\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)OpenCV\x64\vc16\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)OpenCV\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)OpenCV\x64\vc16\lib;$(LibraryPath)</LibraryPath>
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\output\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -119,7 +121,7 @@
       <AdditionalDependencies>opencv_world470d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>XCOPY "$(SolutionDir)"\OpenCV\x64\vc16\bin\*.DLL "$(TargetDir)" /D /K /Y</Command>
+      <Command>XCOPY "$(ProjectDir)"\OpenCV\x64\vc16\bin\*.DLL "$(TargetDir)" /D /K /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -139,7 +141,7 @@
       <AdditionalDependencies>opencv_world470.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>XCOPY "$(SolutionDir)"\OpenCV\x64\vc16\bin\*.DLL "$(TargetDir)" /D /K /Y</Command>
+      <Command>XCOPY "$(ProjectDir)"\OpenCV\x64\vc16\bin\*.DLL "$(TargetDir)" /D /K /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
