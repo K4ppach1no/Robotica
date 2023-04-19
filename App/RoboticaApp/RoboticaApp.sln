@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoboticaApp", "RoboticaApp\RoboticaApp.csproj", "{C7CEEFE6-5395-4FF5-A20E-F68E27ED50BF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppTests", "AppTests\AppTests.csproj", "{CBA63671-DC4F-4252-8B7A-15D60AA8EC34}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,10 @@ Global
 		{C7CEEFE6-5395-4FF5-A20E-F68E27ED50BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7CEEFE6-5395-4FF5-A20E-F68E27ED50BF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C7CEEFE6-5395-4FF5-A20E-F68E27ED50BF}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{CBA63671-DC4F-4252-8B7A-15D60AA8EC34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBA63671-DC4F-4252-8B7A-15D60AA8EC34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBA63671-DC4F-4252-8B7A-15D60AA8EC34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBA63671-DC4F-4252-8B7A-15D60AA8EC34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
