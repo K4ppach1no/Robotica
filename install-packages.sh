@@ -14,11 +14,13 @@ function add_package_exe(){
 	if [ -d "$LOCAL_PACKAGE_DIR$name" ]; then
 		echo "$LOCAL_PACKAGE_DIR already exists"
 		return
+	else
+		mkdir "$PACKAGES_DIR"
 	fi
 	cd "$LOCAL_PACKAGE_DIR"
 	wget "$tar_url" -O "$name.exe"
 	powershell -WindowStyle Hidden "start cmd \"/k $name.exe -o . -y -gm2\" -v runAs"
-	rm "$name.exe"
+	#rm "$name.exe"
 }
 
 # check if cmd is running as admin
@@ -52,7 +54,7 @@ declare -A dependencies=(
 # Check if each dependency is installed and install missing ones
 for dep in "${!dependencies[@]}"; do
 	version=${dependencies[$dep]}
-	#if dependency has alreadready been installed
+	#if dependency has already been installed
 	if command -v "$dep" > /dev/null 2>&1; then
 		installed_version=`$dep --version | grep -Eo '[0-9]+(\.[0-9]+)*'`
 		#if the installed version is different than specified version
