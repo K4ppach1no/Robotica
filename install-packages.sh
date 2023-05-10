@@ -2,7 +2,6 @@
 MAIN_PATH="$(dirname "$(readlink -f "$0")")"
 PROGRAM_FILES_PATH=$(powershell -c '${env:ProgramFiles}')
 ENV_VARIABLES=$(powershell -c "[Environment]::GetEnvironmentVariable('PATH', 'Machine')")
-DEFAULT_CHOCOLATEY_PATH="C:/ProgramData/Chocolatey"
 PACKAGES_DIR="$PROGRAM_FILES_PATH/packages/"
 
 # install chocolatey
@@ -124,12 +123,14 @@ if ! net session >nul 2>&1; then
   exit
 fi
 
+#install packages
 install_chocolatey
 install_using_choco "unzip" "cmake" "tar" "wget"
 
+#install opencv
 add_package_exe "https://github.com/opencv/opencv/releases/download/4.7.0/opencv-4.7.0-windows.exe" "opencv"
 
-install_from_github_using_cmake "https://github.com/martinus/nanobench/archive/refs/tags/v4.3.11.zip" "nanobench"
+#use like this -> install_from_github_using_cmake "https://github.com/martinus/nanobench/archive/refs/tags/v4.3.11.zip" "nanobench"
 
 rm nul
 echo "All done"
