@@ -56,18 +56,16 @@ function add_package_exe() {
   local tar_url=$1
   local name=$2
 
-  local LOCAL_PACKAGE_DIR="$PACKAGES_DIR$name"
-
   #check if package already exists
-  if [[ -d "$LOCAL_PACKAGE_DIR" ]]; then
+  if [[ -d "$PACKAGES_DIR$name" ]]; then
     echo "$name already exists"
     return
   fi
   
   # make directory for package
-  mkdir -p "$LOCAL_PACKAGE_DIR"
+  mkdir -p "$PACKAGES_DIR"
 
-  cd "$LOCAL_PACKAGE_DIR" || die
+  cd "$PACKAGES_DIR" || die
   wget "$tar_url" -O "$name.exe"
   
   chmod +x "$name".exe
