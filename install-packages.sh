@@ -134,3 +134,5 @@ add_package_exe "https://github.com/opencv/opencv/releases/download/4.7.0/opencv
 
 rm nul
 echo "All done"
+
+read
