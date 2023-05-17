@@ -22,22 +22,22 @@ cv::Mat imagePrep(cv::Mat img) {
     return thresh;
 }
 
-int main()
-{
-    cv::Mat img = loadImage(R"(C:\Users\Alissa\Documents\Stenden\robotica\testcases-photo\test30.jpg)");
+cv::Mat detectBox(std::string img_path) {
+
+    cv::Mat img = loadImage(img_path);
     cv::Mat imgEnv = loadImage(R"(C:\Users\Alissa\Documents\Stenden\robotica\testcases-photo\test29.jpg)");
     cv::Mat thresh, threshEnv, masked;
-    
+
     //prepares the mask for the background 
-    threshEnv=imagePrep(imgEnv);
+    threshEnv = imagePrep(imgEnv);
 
-    thresh= imagePrep(img);
+    thresh = imagePrep(img);
 
-    
+
     //layers the mask on top of the threshold picture,
     cv::bitwise_not(thresh, masked, threshEnv);
 
-    #pragma region contours
+#pragma region contours
     std::vector<std::vector<cv::Point> > contours;
     std::vector<cv::Vec4i> hierarchy;
     cv::findContours(masked, contours, hierarchy, cv::RETR_TREE, cv::CHAIN_APPROX_SIMPLE);
@@ -50,11 +50,12 @@ int main()
     for (int i = 0; i < contours.size(); i++) {
         double area = cv::contourArea(contours[i]);
         //if the area is to small it will not be included
+
         if (area > 50) {
             //create bounding box for the contours
             cv::Rect rect = cv::boundingRect(contours[i]);
             //ignore outline of big box at the corners
-            if (rect.area() < (imageX*imageY)) {
+            if (rect.area() < (imageX * imageY)) {
                 //the following if statements are meant to check what the outer most corners are of all the boxes combined
                 //these outer corners will be the corners of the main box surounding the medicine box
                 if (rect.x < x) {
@@ -79,23 +80,23 @@ int main()
 
     //because w is actual width but just the furthest x point we subtract the x of the box
     //because h is actual height but just the furthest y point we subtract the y of the box
-    w = w-x;
-    h = h-y;
+    w = w - x;
+    h = h - y;
 
     //create rectangle with new variables and draw
     cv::Rect medicine = cv::Rect(x, y, w, h);
     cv::rectangle(img, medicine, (255, 20, 20), 1);
 
     //some info into the output window thingy
-    std::cout << "Het medicijn doosje is op  x: "<<medicine.x<<", op y: " << medicine.y << ", met een breedte van: " << medicine.width << ", een hoogte van: " << medicine.height << " en een totaal oppervlak van : "<<medicine.area();
-
+    std::cout << "Het medicijn doosje is op  x: " << medicine.x << ", op y: " << medicine.y << ", met een breedte van: " << medicine.width << ", een hoogte van: " << medicine.height << " en een totaal oppervlak van : " << medicine.area();
+    return img;
 #pragma endregion
+}
 
-    cv::imshow("img", img);
-    cv::imshow("thresh set value", threshEnv);
-    cv::imshow("thresh using adapt gausian", thresh);
-    cv::imshow("masked", masked);
-
+int main()
+{
+    cv::Mat result = detectBox(R"(C:\Users\Alissa\Documents\Stenden\robotica\testcases-photo\test30.jpg)");
+    cv::imshow("img", result);
 
     cv::waitKey(0);
     std::cout << "Hello World!\n";
