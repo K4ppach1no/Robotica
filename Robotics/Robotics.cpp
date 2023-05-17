@@ -24,7 +24,7 @@ cv::Mat imagePrep(cv::Mat img) {
 
 int main()
 {
-    cv::Mat img = loadImage(R"(C:\Users\Alissa\Documents\Stenden\robotica\testcases-photo\test12.jpg)");
+    cv::Mat img = loadImage(R"(C:\Users\Alissa\Documents\Stenden\robotica\testcases-photo\test30.jpg)");
     cv::Mat imgEnv = loadImage(R"(C:\Users\Alissa\Documents\Stenden\robotica\testcases-photo\test29.jpg)");
     cv::Mat thresh, threshEnv, masked;
     
