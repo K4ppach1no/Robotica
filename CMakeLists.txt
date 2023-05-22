@@ -8,7 +8,7 @@ add_executable(Robotics /var/dev/Robotica/Robotics/Robotics.cpp)
 #Step 1: include the library
 target_include_directories(
     Robotics
-    PUBLIC /var/dev/Robotica/opencv/include/opencv2/
+    PUBLIC /var/dev/Robotica/opencv/include/
 )
 
 target_link_libraries(
