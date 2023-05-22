@@ -7,7 +7,12 @@ set(SOURCES
     Robotics/Robotics.cpp
 )
 #Step 2: tell cmake where to find OpenCV
-include(/var/dev/open-cv/opencv-4.7.0/CMakeList.txt)
+include_directories(
+    /var/dev/open-cv/opencv-4.7.0/build/include
+)
+link_directories(
+    /var/dev/open-cv/opencv-4.7.0/build/lib
+)
 
 #Step 3: ???
 
