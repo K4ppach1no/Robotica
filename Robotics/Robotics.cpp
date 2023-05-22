@@ -6,7 +6,7 @@
 
 int main()
 {
-    std::string img_path = R"(..\bard.png)"; //TODO: delete bard picture
+    std::string img_path = R"(../bard.png)"; //TODO: delete bard picture
     cv::Mat img = cv::imread(img_path, cv::IMREAD_COLOR);
     cv::resize(img, img, {500, 500}, 0, 0, cv::INTER_NEAREST);
     cv::imshow("img", img);
