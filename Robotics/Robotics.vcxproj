@@ -114,6 +114,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -132,6 +134,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -145,7 +149,43 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Robotics.cpp" />
+    <ClCompile Include="accelerator.cpp" />
+    <ClCompile Include="camera.cpp" />
+    <ClCompile Include="controller.cpp" />
+    <ClCompile Include="frequence.cpp" />
+    <ClCompile Include="grab_arm.cpp" />
+    <ClCompile Include="led.cpp" />
+    <ClCompile Include="medicine_box.cpp" />
+    <ClCompile Include="microphone.cpp" />
+    <ClCompile Include="opencv.cpp" />
+    <ClCompile Include="parser.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="remote_controler.cpp" />
+    <ClCompile Include="speaker.cpp" />
+    <ClCompile Include="track_motor.cpp" />
+    <ClCompile Include="website.cpp" />
+    <ClCompile Include="weight_sensor.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="accelerator.h" />
+    <ClInclude Include="camera.h" />
+    <ClInclude Include="controller.h" />
+    <ClInclude Include="frequence.h" />
+    <ClInclude Include="grab_arm.h" />
+    <ClInclude Include="led.h" />
+    <ClInclude Include="medicine_box.h" />
+    <ClInclude Include="microphone.h" />
+    <ClInclude Include="opencv.h" />
+    <ClInclude Include="parser.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="remote_controler.h" />
+    <ClInclude Include="speaker.h" />
+    <ClInclude Include="track_motor.h" />
+    <ClInclude Include="website.h" />
+    <ClInclude Include="weight_sensor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
