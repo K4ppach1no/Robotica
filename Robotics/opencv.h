@@ -7,6 +7,7 @@
 #include <iostream>
 #include <assert.h>
 
+
 #include "camera.h"
 #include "controller.h"
 #include "website.h"
@@ -25,7 +26,9 @@ private:
 	//medicine_box medicine_box[];
 
 public:
-	void detect_object();
+	void detect_object(Mat img);
+
+	Mat blur_difference(Mat img, int h1, int s1, int h2, int s2);
 
 };
 #endif

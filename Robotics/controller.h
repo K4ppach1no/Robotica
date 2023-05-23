@@ -18,7 +18,7 @@
 #include "led.h"
 #include "accelerator.h"
 #include "speaker.h"
-//#include "opencv.h"
+#include "opencv.h"
 #include "frequence.h"
 
 class controller
