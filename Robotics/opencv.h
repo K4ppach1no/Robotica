@@ -18,7 +18,7 @@ class opencv
 {
 private:
 	//camera camera;
-	//controller controller;
+	//class controller controller;
 	//website website;
 	//grab_arm grab_arm;
 	//track_motor track_motor;

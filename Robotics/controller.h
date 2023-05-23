@@ -18,7 +18,7 @@
 #include "led.h"
 #include "accelerator.h"
 #include "speaker.h"
-#include "opencv.h"
+//#include "opencv.h"
 #include "frequence.h"
 
 class controller
@@ -35,7 +35,7 @@ private:
 	//led led[];
 	//accelerator accelerator;
 	//speaker speaker;
-	//opencv opencv;
+	//class opencv opencv_;
 	//frequence frequences[];
 
 public:
