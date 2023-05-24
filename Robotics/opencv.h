@@ -30,7 +30,7 @@ public:
 
 	Mat blur_difference(Mat img, int h1, int s1, int h2, int s2);
 
-	
+	float area_percentage(vector<Point> contour);
 
 };
 #endif

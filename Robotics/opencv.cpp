@@ -21,32 +21,20 @@ void opencv::detect_object(Mat img)
 
     for (size_t i = 0; i < contours.size(); i++)
     {
-        
         //color = Scalar(rng.uniform(0, 256), rng.uniform(0, 256), rng.uniform(0, 256));
         //drawContours(img, contours, (int)i, color, 2, LINE_8, hierarchy, 0);
-        if (contourArea(contours[i]) > 1500 && hierarchy[i][3] == -1) {
+        if (contourArea(contours[i]) > 1500 && hierarchy[i][3] == -1&& area_percentage(contours[i]) > 30) {
 
             int a = 0;
-
             for (int y = 0; y < hierarchy.size(); y++) {
-                if (hierarchy[y][3] == i) {
-                    Rect rect = boundingRect(contours[y]);
-                    int rectarea = rect.width * rect.height;
-                    if (contourArea(contours[y]) * (100.0 / rectarea) > 30 && contourArea(contours[y])>500) {
-                        a++;
-                    }
-
+                if (hierarchy[y][3] == i&& area_percentage(contours[y]) > 30 && contourArea(contours[y]) > 500) {
+                    a++;
                 }
             }
 
             if (a > hierachy_size) { 
-
-                Rect rect = boundingRect(contours[i]);
-                int rectarea = rect.width * rect.height;
-                if (contourArea(contours[i]) * (100.0 / rectarea) > 30) {
-                    hierachy_size = a;
-                    main_box = i;
-                }
+                hierachy_size = a;
+                main_box = i;
             }
         }
     }
@@ -60,8 +48,9 @@ void opencv::detect_object(Mat img)
     int rectarea = rect.width * rect.height;
     Point point1 = Point(rect.x + 0.5 * rect.width, rect.y + 0.5 * rect.height);
 
-    circle(img, point1, 2, color, FILLED, LINE_8);(rect.x, rect.x + rect.width);
-    rectangle(img, rect.tl(), rect.br(), color, 2);
+    //TODO include rotated boundingboxes and getting the area of that instead
+    circle(img, point1, 2, color, FILLED, LINE_8);
+    rectangle(img, rect.tl(), rect.br(), color, 2); 
 
     Mat cropped_image = img(Range(rect.y, rect.y + rect.height), Range(rect.x, rect.x + rect.width));
     resize(cropped_image, cropped_image, { 500, 500 }, 0, 0, INTER_NEAREST);
@@ -86,6 +75,13 @@ Mat opencv::blur_difference(Mat img, int h1, int s1, int h2, int s2)
     dif = b1 - b2;
 
     return dif;
+}
+
+float opencv::area_percentage(vector<Point> contour)
+{
+    Rect rect = boundingRect(contour);
+    int rectarea = rect.width * rect.height;
+    return contourArea(contour) * (100.0 / rectarea);
 }
 
 
