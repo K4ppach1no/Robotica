@@ -18,6 +18,7 @@ void controller::detect_object()
 
 }
 
+//dit verplaatsen naar misschien camera class?
 void camera() {
     opencv opencv_;
     //opencv_.detect_object();
@@ -47,7 +48,7 @@ void camera() {
 int main()
 {
     opencv opencv_;
-    //string img_path = R"(C:\Users\Alissa\Documents\Stenden\robotica\testcases-photo\IMG_20230515_091455.jpg)"; //TODO: delete bard picture
+    //string img_path = R"(C:\Users\Alissa\Documents\Stenden\robotica\testcases-photo\IMG20230516092758.jpg)"; //TODO: delete bard picture
     //Mat img = imread(img_path, IMREAD_COLOR);
     //opencv_.detect_object(img);
     //waitKey(0);
