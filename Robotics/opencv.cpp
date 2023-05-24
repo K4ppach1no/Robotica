@@ -21,7 +21,7 @@ void opencv::detect_object(Mat img)
 
     for (size_t i = 0; i < contours.size(); i++)
     {
-        //approxPolyDP(contours[i], approx, 0.01 * arcLength(contours[i], true), true);
+        
         //color = Scalar(rng.uniform(0, 256), rng.uniform(0, 256), rng.uniform(0, 256));
         //drawContours(img, contours, (int)i, color, 2, LINE_8, hierarchy, 0);
         if (contourArea(contours[i]) > 1500 && hierarchy[i][3] == -1) {
@@ -32,7 +32,7 @@ void opencv::detect_object(Mat img)
                 if (hierarchy[y][3] == i) {
                     Rect rect = boundingRect(contours[y]);
                     int rectarea = rect.width * rect.height;
-                    if (contourArea(contours[y]) * (100.0 / rectarea) > 30) {
+                    if (contourArea(contours[y]) * (100.0 / rectarea) > 30 && contourArea(contours[y])>500) {
                         a++;
                     }
 
@@ -60,8 +60,11 @@ void opencv::detect_object(Mat img)
     int rectarea = rect.width * rect.height;
     Point point1 = Point(rect.x + 0.5 * rect.width, rect.y + 0.5 * rect.height);
 
-    circle(img, point1, 2, color, FILLED, LINE_8);
+    circle(img, point1, 2, color, FILLED, LINE_8);(rect.x, rect.x + rect.width);
     rectangle(img, rect.tl(), rect.br(), color, 2);
+
+    Mat cropped_image = img(Range(rect.y, rect.y + rect.height), Range(rect.x, rect.x + rect.width));
+    resize(cropped_image, cropped_image, { 500, 500 }, 0, 0, INTER_NEAREST);
 
     cout << point1 << " " << endl;
     cout << rectarea << " " << endl;
@@ -71,6 +74,7 @@ void opencv::detect_object(Mat img)
     cout << "move to x : " << 250 - point1.x << " and y : " << point1.y - 250 << endl; //use to determine how much the arm needs to rotate?
    
     imshow("img", img);
+    imshow("cropped", cropped_image);
 }
 
 Mat opencv::blur_difference(Mat img, int h1, int s1, int h2, int s2)
