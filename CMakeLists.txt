@@ -2,8 +2,15 @@
 cmake_minimum_required(VERSION 3.18.4)
 project(Robotics)
 
-#Tell CMake that we're making an executable
-add_executable(Robotics /var/dev/Robotica/Robotics/controller.cpp)
+
+
+#Tell CMake that we're making an executable and where to find the cpp files
+file(GLOB Robotics_SRC
+     "*.h"
+     "*.cpp"
+)
+
+add_executable(Robotics ${Robotics_SRC})
 
 #Add the include directory
 target_include_directories(
