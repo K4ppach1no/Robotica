@@ -20,7 +20,7 @@ Mat blur_difference(Mat img, int h1, int s1, int h2, int s2)
 int main()
 {
     Mat frame, gray, boxed;
-    VideoCapture cap = VideoCapture(0);
+    VideoCapture cap = VideoCapture(CAP_V4L2);
     cap.read(frame);
 
     for (;;)
