@@ -8,9 +8,9 @@ add_executable(Robotics
     /var/dev/Robotica/Robotics/controller.cpp
     /var/dev/Robotica/Robotics/controller.h
 )
-target_precompile_headers(Robotics
-    /var/dev/Robotica/Robotics/pch.h
-)
+#target_precompile_headers(Robotics
+#    /var/dev/Robotica/Robotics/pch.h
+#)
 
 set_target_properties(Robotics PROPERTIES LINKER_LANGUAGE CXX)
 
