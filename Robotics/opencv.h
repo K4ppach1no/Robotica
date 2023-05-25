@@ -32,5 +32,7 @@ public:
 
 	float area_percentage(vector<Point> contour);
 
+	float area_rotated_percentage(vector<Point> contour);
+
 };
 #endif
