@@ -17,7 +17,7 @@ void opencv::detect_object(Mat img)
     threshold(blur_difference(grey, 7, 7, 17, 13), thr, 1, 255, THRESH_BINARY);
     findContours(thr, contours, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE);
 
-    Scalar color = Scalar(rng.uniform(0, 256), rng.uniform(0, 256), rng.uniform(0, 256));
+    //Scalar color = Scalar(rng.uniform(0, 256), rng.uniform(0, 256), rng.uniform(0, 256));
 
     for (size_t i = 0; i < contours.size(); i++)
     {
@@ -48,12 +48,13 @@ void opencv::detect_object(Mat img)
     RotatedRect rotated_rect = minAreaRect(contours[main_box]);
     rotated_rect.points(box);
     int rotatedarea = rotated_rect.size.width * rotated_rect.size.height;
+    /*
     for (int i = 0; i < 4; i++) { //because box cant be drawen using rectangle get evry point and draw lines between each point
         line(img, box[i], box[(i + 1) % 4], color);
-    }
+    }*/
 
     //center
-    circle(img, rotated_rect.center, 2, color, FILLED, LINE_8);
+    //circle(img, rotated_rect.center, 2, color, FILLED, LINE_8);
 
 
     cout << rotated_rect.center << endl;
@@ -64,7 +65,7 @@ void opencv::detect_object(Mat img)
     cout << hierachy_size << " " << endl;
     cout << "move to x : " << 250 - rotated_rect.center.x << " and y : " << rotated_rect.center.y - 250 << endl; //use to determine how much the arm needs to rotate?
    
-    imshow("img", img);
+    //imshow("img", img);
 
 }
 
