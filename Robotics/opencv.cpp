@@ -9,7 +9,7 @@
 #include <assert.h>
 
 #include <opencv2/core/core.hpp>
-#include <opencv2/highgui/highgui.hpp>
+//#include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc.hpp>
 
 using namespace std;
@@ -54,7 +54,7 @@ void opencv::detect_object(Mat img)
     }
 
     if (main_box == -1) { //as long as the main_box = -1 they will not draw other wise it will start drawing a box around 0 because it could not find the correct one
-        imshow("img", img);
+        //imshow("img", img);
         return;
     }
 
