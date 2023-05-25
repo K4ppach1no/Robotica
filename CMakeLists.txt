@@ -5,7 +5,9 @@ project(Robotics)
 
 #Tell CMake that we're making an executable and where to find the cpp files
 
-add_executable(Robotics 
+add_executable(Robotics
+    /var/dev/Robotica/Robotics/camera.cpp
+    /var/dev/Robotica/Robotics/camera.h 
     /var/dev/Robotica/Robotics/controller.cpp
     /var/dev/Robotica/Robotics/controller.h
 )
