@@ -7,8 +7,6 @@ project(Robotics)
 #Tell CMake that we're making an executable and where to find the cpp files
 file(GLOB_RECURSE sources CONFIGURE_DEPENDS "*.cpp " "*.h")
 
-add_executable(my_target )
-
 add_executable(Robotics ${sources})
 
 #Add the include directory
