@@ -6,8 +6,8 @@ project(Robotics)
 #Tell CMake that we're making an executable and where to find the cpp files
 
 add_executable(Robotics 
-    /var/dev/Robotica/controller.cpp
-    /var/dev/Robotica/controller.h
+    /var/dev/Robotica/Robotics/controller.cpp
+    /var/dev/Robotica/Robotics/controller.h
 )
 
 set_target_properties(Robotics PROPERTIES LINKER_LANGUAGE CXX)
