@@ -2,14 +2,14 @@
 cmake_minimum_required(VERSION 3.18.4)
 project(Robotics)
 
-set(path "{path}")
+set(path "/var/dev/Robotica/")
 
 
 #Tell CMake that we're making an executable and where to find the cpp files
 
 add_executable(Robotics 
-    {path}/Robotics/controller.cpp
-    {path}/Robotics/controller.h
+    {path}/Robcontroller.cpp
+    {path}/Robcontroller.h
 )
 
 set_target_properties(Robotics PROPERTIES LINKER_LANGUAGE CXX)
