@@ -3,6 +3,16 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc.hpp>
+
+#define INPUT_WIDTH 3264
+#define INPUT_HEIGHT 2464
+
+#define DISPLAY_WIDTH 640
+#define DISPLAY_HEIGHT 480
+
+#define CAMERA_FRAMERATE 21/1
+#define FLIP 2
+
 using namespace cv;
 
 Mat blur_difference(Mat img, int h1, int s1, int h2, int s2)
