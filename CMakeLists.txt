@@ -2,14 +2,12 @@
 cmake_minimum_required(VERSION 3.18.4)
 project(Robotics)
 
-set(path "/var/dev/Robotica/")
-
 
 #Tell CMake that we're making an executable and where to find the cpp files
 
 add_executable(Robotics 
-    {path}/Robcontroller.cpp
-    {path}/Robcontroller.h
+    /var/dev/Robotica//Robcontroller.cpp
+    /var/dev/Robotica//Robcontroller.h
 )
 
 set_target_properties(Robotics PROPERTIES LINKER_LANGUAGE CXX)
@@ -17,27 +15,27 @@ set_target_properties(Robotics PROPERTIES LINKER_LANGUAGE CXX)
 #Add the include directory
 target_include_directories(
     Robotics
-    PUBLIC {path}opencv/include/
+    PUBLIC /var/dev/Robotica/opencv/include/
 )
 
 #Link the libraries
 target_link_libraries(
     Robotics
    
-    {path}opencv/lib/libopencv_calib3d.so
-    {path}opencv/lib/libopencv_core.so
-    {path}opencv/lib/libopencv_dnn.so
-    {path}opencv/lib/libopencv_features2d.so
-    {path}opencv/lib/libopencv_flann.so
-    {path}opencv/lib/libopencv_gapi.so
-    {path}opencv/lib/libopencv_highgui.so
-    {path}opencv/lib/libopencv_imgcodecs.so
-    {path}opencv/lib/libopencv_imgproc.so
-    {path}opencv/lib/libopencv_ml.so
-    {path}opencv/lib/libopencv_objdetect.so
-    {path}opencv/lib/libopencv_photo.so
-    {path}opencv/lib/libopencv_stitching.so
-    {path}opencv/lib/libopencv_ts.a
-    {path}opencv/lib/libopencv_video.so
-    {path}opencv/lib/libopencv_videoio.so
+    /var/dev/Robotica/opencv/lib/libopencv_calib3d.so
+    /var/dev/Robotica/opencv/lib/libopencv_core.so
+    /var/dev/Robotica/opencv/lib/libopencv_dnn.so
+    /var/dev/Robotica/opencv/lib/libopencv_features2d.so
+    /var/dev/Robotica/opencv/lib/libopencv_flann.so
+    /var/dev/Robotica/opencv/lib/libopencv_gapi.so
+    /var/dev/Robotica/opencv/lib/libopencv_highgui.so
+    /var/dev/Robotica/opencv/lib/libopencv_imgcodecs.so
+    /var/dev/Robotica/opencv/lib/libopencv_imgproc.so
+    /var/dev/Robotica/opencv/lib/libopencv_ml.so
+    /var/dev/Robotica/opencv/lib/libopencv_objdetect.so
+    /var/dev/Robotica/opencv/lib/libopencv_photo.so
+    /var/dev/Robotica/opencv/lib/libopencv_stitching.so
+    /var/dev/Robotica/opencv/lib/libopencv_ts.a
+    /var/dev/Robotica/opencv/lib/libopencv_video.so
+    /var/dev/Robotica/opencv/lib/libopencv_videoio.so
 )
