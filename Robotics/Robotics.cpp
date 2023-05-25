@@ -19,8 +19,28 @@ Mat blur_difference(Mat img, int h1, int s1, int h2, int s2)
 
 int main()
 {
+    std::stringstream ss;
+
+    ss << "nvarguscamerasrc !  video/x-raw(memory:NVMM), width=3264, height=2464, format=NV12, framerate=21/1 ! nvvidconv flip-method=2 ! video/x-raw, width=480, height=680, format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink";
+
+    //ss << "nvarguscamerasrc !  video/x-raw(memory:NVMM), width=" << INPUT_WIDTH <<
+    //", height=" << INPUT_HEIGHT <<
+    //", format=NV12, framerate=" << CAMERA_FRAMERATE <<
+    //" ! nvvidconv flip-method=" << FLIP <<
+    //" ! video/x-raw, width=" << DISPLAY_WIDTH <<
+    //", height=" << DISPLAY_HEIGHT <<
+    //", format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink";  
+
     Mat frame, gray, boxed;
-    VideoCapture cap = VideoCapture(CAP_V4L2);
+    VideoCapture cap;
+    cap.open(ss.str());
+
+    if (!cap.isOpened()) {
+        std::cerr << "ERROR! no camera\n";
+        return -1;
+    }
+
+
     cap.read(frame);
 
     for (;;)
