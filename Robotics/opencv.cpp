@@ -24,11 +24,11 @@ void opencv::detect_object(Mat img)
     {
         //color = Scalar(rng.uniform(0, 256), rng.uniform(0, 256), rng.uniform(0, 256));
         //drawContours(img, contours, (int)i, color, 2, LINE_8, hierarchy, 0);
-        if (contourArea(contours[i]) > 1500 && hierarchy[i][3] == -1&& area_rotated_percentage(contours[i]) > 50) {
+        if (contourArea(contours[i]) > 1500 && hierarchy[i][3] == -1&& area_rotated_percentage(contours[i]) > 30) {
 
             int a = 0;
             for (int y = 0; y < hierarchy.size(); y++) {
-                if (hierarchy[y][3] == i&& area_rotated_percentage(contours[y]) > 50 && contourArea(contours[y]) > 500) {
+                if (hierarchy[y][3] == i&& area_rotated_percentage(contours[y]) > 30 && contourArea(contours[y]) > 500) {
                     a++;
                 }
             }
@@ -54,9 +54,6 @@ void opencv::detect_object(Mat img)
     int rotatedarea = rotated_rect.size.width * rotated_rect.size.height;
     circle(img, rotated_rect.center, 2, color, FILLED, LINE_8);
 
-    //Mat cropped_image = img(Range(rect.y, rect.y + rect.height), Range(rect.x, rect.x + rect.width));
-    //resize(cropped_image, cropped_image, { 500, 500 }, 0, 0, INTER_NEAREST);
-
     cout << rotated_rect.center << endl;
     cout << rotated_rect.angle << endl;
     cout << "size of rotated area : " << rotatedarea << endl;
@@ -78,13 +75,6 @@ Mat opencv::blur_difference(Mat img, int h1, int s1, int h2, int s2)
     dif = b1 - b2;
 
     return dif;
-}
-
-float opencv::area_percentage(vector<Point> contour)
-{
-    Rect rect = boundingRect(contour);
-    int rectarea = rect.width * rect.height;
-    return contourArea(contour) * (100.0 / rectarea);
 }
 
 float opencv::area_rotated_percentage(vector<Point> contour)
