@@ -4,11 +4,11 @@ project(Robotics)
 
 
 #Tell CMake that we're making an executable and where to find the cpp files
+target_precompile_headers(Robotics
+    /var/dev/Robotica/Robotics/pch.h
+)
 
 add_executable(Robotics
-    /var/dev/Robotica/Robotics/pch.h
-    /var/dev/Robotica/Robotics/camera.cpp
-    /var/dev/Robotica/Robotics/camera.h 
     /var/dev/Robotica/Robotics/controller.cpp
     /var/dev/Robotica/Robotics/controller.h
 )
