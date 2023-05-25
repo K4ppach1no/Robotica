@@ -2,15 +2,16 @@
 cmake_minimum_required(VERSION 3.18.4)
 project(Robotics)
 
-#Step 4: success?
+#Tell CMake that we're making an executable
 add_executable(Robotics /var/dev/Robotica/Robotics/Robotics.cpp)
 
-#Step 1: include the library
+#Add the include directory
 target_include_directories(
     Robotics
     PUBLIC /var/dev/Robotica/opencv/include/
 )
 
+#Link the libraries
 target_link_libraries(
     Robotics
    
