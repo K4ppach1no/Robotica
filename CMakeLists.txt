@@ -4,7 +4,10 @@ project(Robotics)
 
 
 #Tell CMake that we're making an executable and where to find the cpp files
-file(GLOB_RECURSE sources CONFIGURE_DEPENDS "*.cpp " "*.h")
+target_sources(
+    /var/dev/Robotica/Robotics/camera.cpp
+    /var/dev/Robotica/Robotics/camera.h
+)
 
 add_executable(Robotics /var/dev/Robotica/Robotics/controller.cpp)
 set_target_properties(Robotics PROPERTIES LINKER_LANGUAGE CXX)
