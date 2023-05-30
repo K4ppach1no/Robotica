@@ -35,15 +35,13 @@ void opencv::detect_object(Mat img)
     // Find contours and hierarchy of the thresholded image
     findContours(thr, contours, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE);
 
-    Scalar color = Scalar(rng.uniform(0, 256), rng.uniform(0, 256), rng.uniform(0, 256));//TODO uncomment for rasp
+    // Scalar color = Scalar(rng.uniform(0, 256), rng.uniform(0, 256), rng.uniform(0, 256));
 
     // Iterate over each contour
     for (size_t i = 0; i < contours.size(); i++)
     {
-        //color = Scalar(rng.uniform(0, 256), rng.uniform(0, 256), rng.uniform(0, 256));
-        //drawContours(img, contours, (int)i, color, 2, LINE_8, hierarchy, 0);
-        //if the contours dont have any parents(-1), has a area bigger than 1500 and has a certain percentage thats equal to a square
-        if (contourArea(contours[i]) > 1500 && hierarchy[i][3] == -1&& area_rotated_percentage(contours[i]) > 30) {
+        // color = Scalar(rng.uniform(0, 256), rng.uniform(0, 256), rng.uniform(0, 256));
+        // drawContours(img, contours, (int)i, color, 2, LINE_8, hierarchy, 0);
 
         // Calculate the contour area and rotated area percentage
         float contour_area = contourArea(contours[i]);
@@ -69,21 +67,22 @@ void opencv::detect_object(Mat img)
         }
     }
 
-    if (main_box == -1) { //as long as the main_box = -1 they will not draw other wise it will start drawing a box around 0 because it could not find the correct one
-        imshow("img", img);//TODO uncomment for rasp
+    if (main_box == -1) {
+        // No main object found, return
+        // imshow("img", img);
         return;
     }
 
-
-    //draw rotated box that fits description
+    // Draw rotated box that fits the description
     RotatedRect rotated_rect = minAreaRect(contours[main_box]);
     rotated_rect.points(box);
-    int rotatedarea = rotated_rect.size.width * rotated_rect.size.height;
-    
-    //TODO uncomment for rasp
-    for (int i = 0; i < 4; i++) { //because box cant be drawen using rectangle, get ev3ry point and draw lines between each point
+    int rotated_area = rotated_rect.size.width * rotated_rect.size.height;
+
+    /*
+    for (int i = 0; i < 4; i++) {
+        // Draw lines between each point to form the rotated box
         line(img, box[i], box[(i + 1) % 4], color);
-    }
+    }*/
 
     // Draw center
     // circle(img, rotated_rect.center, 2, color, FILLED, LINE_8);
