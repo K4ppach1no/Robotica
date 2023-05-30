@@ -32,39 +32,25 @@ void controller::detect_object()
 
 }
 
-//dit verplaatsen naar misschien camera class?
-void camera() {
-    opencv opencv_;
-    //opencv_.detect_object();
-    Mat frame, gray, boxed;
-    VideoCapture cap = VideoCapture(0);
-    cap.read(frame);
-
-    for (;;)
-    {
-        // wait for a new frame from camera and store it into 'frame'
-        cap.read(frame);
-        // check if we succeeded
-        if (frame.empty()) {
-            cerr << "ERROR! blank frame grabbed\n";
-            break;
-        }
-        //cvtColor(frame, gray, COLOR_BGR2GRAY);
-        // show live and wait for a key with timeout long enough to show images
-        opencv_.detect_object(frame);
-        //imshow("Live", gray);
-        if (waitKey(5) >= 0)
-            break;
-    }
-    cap.release();
-}
-
 int main()
 {
     opencv opencv_;
-    //string img_path = R"(C:\Users\Alissa\Documents\Stenden\robotica\testcases-photo\IMG20230516092758.jpg)"; //TODO: delete bard picture
-    //Mat img = imread(img_path, IMREAD_COLOR);
-    //opencv_.detect_object(img);
-    //waitKey(0);
-    camera();
+    camera camera_;
+    Mat img;
+
+    while(true)
+    {
+        camera_.get_image_from_camera(img);
+
+        if (img.empty()) {
+            cerr << "ERROR! blank img grabbed\n";
+            continue;
+        }
+
+        opencv_.detect_object(img);
+
+        if (waitKey(5) >= 0)
+            break;
+    }
+
 }
