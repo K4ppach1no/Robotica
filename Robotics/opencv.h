@@ -14,6 +14,7 @@
 #include "grab_arm.h"
 #include "track_motor.h"
 #include "medicine_box.h"
+#include "image_data.h"
 
 class opencv
 {

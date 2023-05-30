@@ -48,6 +48,7 @@ int main()
         }
 
         opencv_.detect_object(img);
+        //imagedata.command_line();
 
         if (waitKey(5) >= 0)
             break;

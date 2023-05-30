@@ -87,14 +87,8 @@ void opencv::detect_object(Mat img)
     // Draw center
     circle(img, rotated_rect.center, 2, color, FILLED, LINE_8);//TODO uit rasp
 
-    // Print information about the main object
-    cout << rotated_rect.center << endl;
-    cout << rotated_rect.angle << endl;
-    cout << "size of rotated area: " << rotated_area << endl;
-    cout << contourArea(contours[main_box]) << endl;
-    cout << "size of rotated area percentage: " << contourArea(contours[main_box]) * (100.0 / rotated_area) << endl;
-    cout << hierarchy_size << " " << endl;
-    cout << "move to x: " << 250 - rotated_rect.center.x << " and y: " << rotated_rect.center.y - 250 << endl;
+    image_data imagedata_ = image_data(rotated_rect.center, rotated_rect.angle, contourArea(contours[main_box]), contourArea(contours[main_box]) * (100.0 / rotated_area), rotated_area, hierarchy_size, 250 - rotated_rect.center.x,rotated_rect.center.y - 250);
+    imagedata_.command_line();
 
     imshow("img", img);//TODO uit rasp
 }

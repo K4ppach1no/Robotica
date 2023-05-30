@@ -20,6 +20,7 @@
 #include "speaker.h"
 #include "opencv.h"
 #include "frequence.h"
+#include "image_data.h"
 
 class controller
 {

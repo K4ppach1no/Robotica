@@ -154,6 +154,7 @@
     <ClCompile Include="controller.cpp" />
     <ClCompile Include="frequence.cpp" />
     <ClCompile Include="grab_arm.cpp" />
+    <ClCompile Include="image_data.cpp" />
     <ClCompile Include="led.cpp" />
     <ClCompile Include="medicine_box.cpp" />
     <ClCompile Include="microphone.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="controller.h" />
     <ClInclude Include="frequence.h" />
     <ClInclude Include="grab_arm.h" />
+    <ClInclude Include="image_data.h" />
     <ClInclude Include="led.h" />
     <ClInclude Include="medicine_box.h" />
     <ClInclude Include="microphone.h" />
