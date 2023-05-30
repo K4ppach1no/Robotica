@@ -1,12 +1,11 @@
 //#include "pch.h"
 #include "opencv.h"
 
-
 #include <string>
 #include <vector>
 #include <list>
 #include <iostream>
-#include <assert.h>
+#include <cassert>
 
 #include <opencv2/core/core.hpp>
 //#include <opencv2/highgui/highgui.hpp>
@@ -23,72 +22,92 @@ void opencv::detect_object(Mat img)
     vector<vector<Point> > contours;
     vector<Vec4i> hierarchy;
 
-    int hierachy_size = 0;
+    int hierarchy_size = 0;
     int main_box = -1;
 
+    // Resize and convert the image to grayscale
     resize(img, img, { 500, 500 }, 0, 0, INTER_NEAREST);
     cvtColor(img, grey, COLOR_BGR2GRAY);
+
+    // Threshold the grayscale image using a blur difference method
     threshold(blur_difference(grey, 7, 7, 17, 13), thr, 1, 255, THRESH_BINARY);
+
+    // Find contours and hierarchy of the thresholded image
     findContours(thr, contours, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE);
 
-    //Scalar color = Scalar(rng.uniform(0, 256), rng.uniform(0, 256), rng.uniform(0, 256));
+    // Scalar color = Scalar(rng.uniform(0, 256), rng.uniform(0, 256), rng.uniform(0, 256));
 
+    // Iterate over each contour
     for (size_t i = 0; i < contours.size(); i++)
     {
-        //color = Scalar(rng.uniform(0, 256), rng.uniform(0, 256), rng.uniform(0, 256));
-        //drawContours(img, contours, (int)i, color, 2, LINE_8, hierarchy, 0);
-        if (contourArea(contours[i]) > 1500 && hierarchy[i][3] == -1&& area_rotated_percentage(contours[i]) > 30) {
+        // color = Scalar(rng.uniform(0, 256), rng.uniform(0, 256), rng.uniform(0, 256));
+        // drawContours(img, contours, (int)i, color, 2, LINE_8, hierarchy, 0);
 
+        // Calculate the contour area and rotated area percentage
+        float contour_area = contourArea(contours[i]);
+        float contour_area_rotated_percentage = area_rotated_percentage(contours[i]);
+
+        // Check conditions for the contour to be considered as the main object
+        if (contour_area > 1500 && hierarchy[i][3] == -1 && contour_area_rotated_percentage > 30) {
             int a = 0;
-            for (int y = 0; y < hierarchy.size(); y++) {
-                if (hierarchy[y][3] == i&& area_rotated_percentage(contours[y]) > 30 && contourArea(contours[y]) > 500) {
-                    a++;
-                }
-            }
+            float contour_y_area_rotated_percentage = area_rotated_percentage(contours[i]);
+            float contour_y_area = contourArea(contours[i]);
 
-            if (a > hierachy_size) { //choose object with highest amounts of kids
-                hierachy_size = a;
-                main_box = i;
+            // Iterate over the hierarchy to find children contours
+            for (int y = 0; y < hierarchy.size(); y++) {
+                if (hierarchy[y][3] == i && contour_y_area_rotated_percentage > 30 && contour_y_area > 500) {
+                    a++;
+                    if (a > hierarchy_size) {
+                        hierarchy_size = a;
+                        main_box = i;
+                        break; // Exit the loop since we have found a larger hierarchy
+                    }
+                }
             }
         }
     }
 
-    if (main_box == -1) { //as long as the main_box = -1 they will not draw other wise it will start drawing a box around 0 because it could not find the correct one
-        //imshow("img", img);
+    if (main_box == -1) {
+        // No main object found, return
+        // imshow("img", img);
         return;
     }
 
-    //draw rotated box that fits description
+    // Draw rotated box that fits the description
     RotatedRect rotated_rect = minAreaRect(contours[main_box]);
     rotated_rect.points(box);
-    int rotatedarea = rotated_rect.size.width * rotated_rect.size.height;
+    int rotated_area = rotated_rect.size.width * rotated_rect.size.height;
+
     /*
-    for (int i = 0; i < 4; i++) { //because box cant be drawen using rectangle get evry point and draw lines between each point
+    for (int i = 0; i < 4; i++) {
+        // Draw lines between each point to form the rotated box
         line(img, box[i], box[(i + 1) % 4], color);
     }*/
 
-    //center
-    //circle(img, rotated_rect.center, 2, color, FILLED, LINE_8);
+    // Draw center
+    // circle(img, rotated_rect.center, 2, color, FILLED, LINE_8);
 
-
+    // Print information about the main object
     cout << rotated_rect.center << endl;
     cout << rotated_rect.angle << endl;
-    cout << "size of rotated area : " << rotatedarea << endl;
-    cout << contourArea(contours[main_box])  << endl;
-    cout << "size of rotated area percentage: " << contourArea(contours[main_box]) * (100.0 / rotatedarea)<< endl;
-    cout << hierachy_size << " " << endl;
-    cout << "move to x : " << 250 - rotated_rect.center.x << " and y : " << rotated_rect.center.y - 250 << endl; //use to determine how much the arm needs to rotate?
-   
-    //imshow("img", img);
+    cout << "size of rotated area: " << rotated_area << endl;
+    cout << contourArea(contours[main_box]) << endl;
+    cout << "size of rotated area percentage: " << contourArea(contours[main_box]) * (100.0 / rotated_area) << endl;
+    cout << hierarchy_size << " " << endl;
+    cout << "move to x: " << 250 - rotated_rect.center.x << " and y: " << rotated_rect.center.y - 250 << endl;
 
+    // imshow("img", img);
 }
 
 Mat opencv::blur_difference(Mat img, int h1, int s1, int h2, int s2)
 {
     Mat b1, b2, dif;
+
+    // Apply Gaussian blur with specified parameters
     GaussianBlur(img, b1, Size(h1, h1), s1);
     GaussianBlur(img, b2, Size(h2, h2), s2);
 
+    // Calculate the difference between the blurred images
     dif = b1 - b2;
 
     return dif;
@@ -96,9 +115,10 @@ Mat opencv::blur_difference(Mat img, int h1, int s1, int h2, int s2)
 
 float opencv::area_rotated_percentage(vector<Point> contour)
 {
+    // Calculate the rotated bounding box and its area
     RotatedRect rotated_rect = minAreaRect(contour);
-    int rotatedarea = rotated_rect.size.width * rotated_rect.size.height;
-    return contourArea(contour) * (100.0 / rotatedarea);;
+    int rotated_area = rotated_rect.size.width * rotated_rect.size.height;
+
+    // Calculate the contour area percentage with respect to the rotated area
+    return contourArea(contour) * (100.0 / rotated_area);
 }
-
-
