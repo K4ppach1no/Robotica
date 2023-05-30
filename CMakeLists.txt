@@ -2,8 +2,19 @@
 cmake_minimum_required(VERSION 3.18.4)
 project(Robotics)
 
-#Tell CMake that we're making an executable
-add_executable(Robotics /var/dev/Robotica/Robotics/Robotics.cpp)
+
+#Tell CMake that we're making an executable and where to find the cpp files
+add_executable(Robotics
+    /var/dev/Robotica/Robotics/opencv.cpp
+    /var/dev/Robotica/Robotics/opencv.h
+    /var/dev/Robotica/Robotics/controller.cpp
+    /var/dev/Robotica/Robotics/controller.h
+)
+#target_precompile_headers(Robotics
+#    /var/dev/Robotica/Robotics/pch.h
+#)
+
+set_target_properties(Robotics PROPERTIES LINKER_LANGUAGE CXX)
 
 #Add the include directory
 target_include_directories(
