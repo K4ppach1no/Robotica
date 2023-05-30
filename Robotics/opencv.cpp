@@ -35,7 +35,7 @@ void opencv::detect_object(Mat img)
     // Find contours and hierarchy of the thresholded image
     findContours(thr, contours, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE);
 
-    // Scalar color = Scalar(rng.uniform(0, 256), rng.uniform(0, 256), rng.uniform(0, 256));
+    Scalar color = Scalar(rng.uniform(0, 256), rng.uniform(0, 256), rng.uniform(0, 256));
 
     // Iterate over each contour
     for (size_t i = 0; i < contours.size(); i++)
@@ -50,17 +50,18 @@ void opencv::detect_object(Mat img)
         // Check conditions for the contour to be considered as the main object
         if (contour_area > 1500 && hierarchy[i][3] == -1 && contour_area_rotated_percentage > 30) {
             int a = 0;
-            float contour_y_area_rotated_percentage = area_rotated_percentage(contours[i]);
-            float contour_y_area = contourArea(contours[i]);
+
 
             // Iterate over the hierarchy to find children contours
-            for (int y = 0; y < hierarchy.size(); y++) {
+            for (int y = i+1; y < hierarchy.size(); y++) {
+                float contour_y_area_rotated_percentage = area_rotated_percentage(contours[y]);
+                float contour_y_area = contourArea(contours[y]);
                 if (hierarchy[y][3] == i && contour_y_area_rotated_percentage > 30 && contour_y_area > 500) {
                     a++;
                     if (a > hierarchy_size) {
                         hierarchy_size = a;
                         main_box = i;
-                        break; // Exit the loop since we have found a larger hierarchy
+                       // break; // Exit the loop since we have found a larger hierarchy
                     }
                 }
             }
@@ -69,7 +70,7 @@ void opencv::detect_object(Mat img)
 
     if (main_box == -1) {
         // No main object found, return
-        // imshow("img", img);
+        imshow("img", img);
         return;
     }
 
@@ -78,14 +79,14 @@ void opencv::detect_object(Mat img)
     rotated_rect.points(box);
     int rotated_area = rotated_rect.size.width * rotated_rect.size.height;
 
-    /*
+    
     for (int i = 0; i < 4; i++) {
         // Draw lines between each point to form the rotated box
         line(img, box[i], box[(i + 1) % 4], color);
-    }*/
+    }
 
     // Draw center
-    // circle(img, rotated_rect.center, 2, color, FILLED, LINE_8);
+    circle(img, rotated_rect.center, 2, color, FILLED, LINE_8);
 
     // Print information about the main object
     cout << rotated_rect.center << endl;
@@ -96,7 +97,7 @@ void opencv::detect_object(Mat img)
     cout << hierarchy_size << " " << endl;
     cout << "move to x: " << 250 - rotated_rect.center.x << " and y: " << rotated_rect.center.y - 250 << endl;
 
-    // imshow("img", img);
+    imshow("img", img);
 }
 
 Mat opencv::blur_difference(Mat img, int h1, int s1, int h2, int s2)
