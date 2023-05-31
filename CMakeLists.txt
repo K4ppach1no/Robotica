@@ -17,14 +17,14 @@ set_target_properties(Robotics PROPERTIES LINKER_LANGUAGE CXX)
 target_include_directories(
     Robotics
     PRIVATE /var/dev/Robotica/opencv/include/
-    PRIVATE /var/dev/sdbus-cpp/include/
+    PRIVATE /var/dev/Robotica/sdbus/include/
 )
 
 #Link the libraries
 target_link_libraries(
     Robotics
     
-    /var/dev/sdbus-cpp/build/lib/libsdbus-c++.so
+    /var/dev/Robotica/sdbus/lib/libsdbus-c++.so
     /var/dev/Robotica/opencv/lib/libopencv_calib3d.so
     /var/dev/Robotica/opencv/lib/libopencv_core.so
     /var/dev/Robotica/opencv/lib/libopencv_dnn.so
