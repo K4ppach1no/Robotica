@@ -10,9 +10,6 @@ add_executable(Robotics
     /var/dev/Robotica/Robotics/controller.cpp
     /var/dev/Robotica/Robotics/controller.h
 )
-#target_precompile_headers(Robotics
-#    /var/dev/Robotica/Robotics/pch.h
-#)
 
 set_target_properties(Robotics PROPERTIES LINKER_LANGUAGE CXX)
 
@@ -20,12 +17,14 @@ set_target_properties(Robotics PROPERTIES LINKER_LANGUAGE CXX)
 target_include_directories(
     Robotics
     PUBLIC /var/dev/Robotica/opencv/include/
+    PUBLIC /var/dev/sdbus-cpp/include/
 )
 
 #Link the libraries
 target_link_libraries(
     Robotics
-   
+    
+    /var/dev/sdbus-cpp/build/lib/libsdbus-c++.so.1.2.0
     /var/dev/Robotica/opencv/lib/libopencv_calib3d.so
     /var/dev/Robotica/opencv/lib/libopencv_core.so
     /var/dev/Robotica/opencv/lib/libopencv_dnn.so
