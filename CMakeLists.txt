@@ -16,8 +16,8 @@ set_target_properties(Robotics PROPERTIES LINKER_LANGUAGE CXX)
 #Add the include directory
 target_include_directories(
     Robotics
-    PUBLIC /var/dev/Robotica/opencv/include/
-    PUBLIC /var/dev/sdbus-cpp/include/
+    /var/dev/Robotica/opencv/include/
+    /var/dev/sdbus-cpp/include/
 )
 
 #Link the libraries
