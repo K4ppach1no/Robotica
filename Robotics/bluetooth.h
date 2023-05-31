@@ -3,6 +3,8 @@
 
 class bluetooth
 {
-	
+	//sdbus test code
+public:
+	void connect();
 };
 
