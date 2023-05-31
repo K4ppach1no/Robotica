@@ -24,7 +24,7 @@ target_include_directories(
 target_link_libraries(
     Robotics
     
-    /var/dev/sdbus-cpp/build/lib/libsdbus-c++.so.1.2.0
+    /var/dev/sdbus-cpp/build/lib/libsdbus-c++.so
     /var/dev/Robotica/opencv/lib/libopencv_calib3d.so
     /var/dev/Robotica/opencv/lib/libopencv_core.so
     /var/dev/Robotica/opencv/lib/libopencv_dnn.so
