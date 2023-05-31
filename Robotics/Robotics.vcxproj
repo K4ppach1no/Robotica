@@ -71,13 +71,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(ProgramFiles)\packages\opencv\build\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProgramFiles)\packages\opencv\build\x64\vc16\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProgramFiles)\packages\SimpleBLE\build\export;$(ProgramFiles)\packages\SimpleBLE\simpleble\include;$(ProgramFiles)\packages\SimpleBLE\simpleble\include;$(ProgramFiles)\packages\opencv\build\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProgramFiles)\packages\SimpleBLE\build\lib;$(ProgramFiles)\packages\opencv\build\x64\vc16\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\output\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProgramFiles)\packages\opencv\build\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProgramFiles)\packages\opencv\build\x64\vc16\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProgramFiles)\packages\SimpleBLE\build\export;$(ProgramFiles)\packages\SimpleBLE\simpleble\include;$(ProgramFiles)\packages\opencv\build\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProgramFiles)\packages\SimpleBLE\build\lib;$(ProgramFiles)\packages\opencv\build\x64\vc16\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\output\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -114,11 +114,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opencv_world470d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opencv_world470d.lib;simpleble-debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>XCOPY "$(ProgramFiles)"\packages\opencv\build\x64\vc16\bin\*.DLL "$(TargetDir)" /D /K /Y</Command>
@@ -132,20 +133,25 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opencv_world470.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opencv_world470.lib;simpleble.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>XCOPY "$(ProgramFiles)"\packages\opencv\build\x64\vc16\bin\*.DLL "$(TargetDir)" /D /K /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="bluetooth.cpp" />
     <ClCompile Include="Robotics.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="bluetooth.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
