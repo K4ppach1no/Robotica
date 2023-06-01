@@ -18,7 +18,10 @@ add_executable(Robotics
     /var/dev/Robotica/Robotics/controller.cpp
 )
 
-set_target_properties(Robotics PROPERTIES LINKER_LANGUAGE CXX)
+set_target_properties(Robotics PROPERTIES 
+    LINKER_LANGUAGE CXX
+    CXX_STANDARD 17
+)
 
 #Add the include directory
 target_include_directories(
