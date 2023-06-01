@@ -10,7 +10,7 @@
 
 
 camera::camera() {
- cap = cv::VideoCapture::VideoCapture(0);
+ cap = cv::VideoCapture(0);
  cout << "camera instanciated";
 }
 
