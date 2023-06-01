@@ -3,6 +3,7 @@
 void bluetooth::connect()
 {
 	
+	std::cout << "starting to connect\n";
 
 	const char* destination_name = "org.bluez";
 	const char* object_path = "/org/bluez/hci0";
@@ -13,10 +14,16 @@ void bluetooth::connect()
 	sdbus_proxy->uponSignal("PropertyChanged").onInterface(interface_name).call(on_property_changed);
 	sdbus_proxy->finishRegistration();
 
-	
+	std::cout << "start discovery\n";
 	const char* method_name = "StartDiscovery";
 	auto method = sdbus_proxy->createMethodCall(interface_name, method_name);
-	sdbus_proxy->callMethod(method);
+	auto reply = sdbus_proxy->callMethod(method);
+	if (!reply.isValid()) {
+		std::cout << "reply is invalid\n";
+	}
+	if (reply.isEmpty()) {
+		std::cout << "reply is empty\n";
+	}
 
 	std::this_thread::sleep_for(std::chrono::seconds(5));
 }
