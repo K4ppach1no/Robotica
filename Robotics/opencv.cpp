@@ -35,7 +35,7 @@ void opencv::detect_object(Mat img)
     // Find contours and hierarchy of the thresholded image
     findContours(thr, contours, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE);
 
-    Scalar color = Scalar(rng.uniform(0, 256), rng.uniform(0, 256), rng.uniform(0, 256));//TODO uit rasp
+    //Scalar color = Scalar(rng.uniform(0, 256), rng.uniform(0, 256), rng.uniform(0, 256));//TODO uit rasp
 
     // Iterate over each contour
     for (size_t i = 0; i < contours.size(); i++)
@@ -69,7 +69,7 @@ void opencv::detect_object(Mat img)
 
     if (main_box == -1) {
         // No main object found, return
-        imshow("img", img); //TODO uit rasp
+       // imshow("img", img); //TODO uit rasp
         return;
     }
 
@@ -78,19 +78,19 @@ void opencv::detect_object(Mat img)
     rotated_rect.points(box);
     int rotated_area = rotated_rect.size.width * rotated_rect.size.height;
 
-    
+   /* 
     for (int i = 0; i < 4; i++) {//TODO uit rasp
         // Draw lines between each point to form the rotated box
         line(img, box[i], box[(i + 1) % 4], color);
     }
 
     // Draw center
-    circle(img, rotated_rect.center, 2, color, FILLED, LINE_8);//TODO uit rasp
+    circle(img, rotated_rect.center, 2, color, FILLED, LINE_8);//TODO uit rasp*/
 
     image_data imagedata_ = image_data(rotated_rect.center, rotated_rect.angle, contourArea(contours[main_box]), contourArea(contours[main_box]) * (100.0 / rotated_area), rotated_area, hierarchy_size, 250 - rotated_rect.center.x,rotated_rect.center.y - 250);
     imagedata_.command_line();
 
-    imshow("img", img);//TODO uit rasp
+   // imshow("img", img);//TODO uit rasp
 }
 
 Mat opencv::blur_difference(Mat img, int h1, int s1, int h2, int s2)
