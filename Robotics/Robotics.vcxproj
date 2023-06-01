@@ -71,12 +71,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(ProgramFiles)\packages\opencv\build\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProgramFiles)\packages\pigpio;$(ProgramFiles)\packages\opencv\build\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProgramFiles)\packages\opencv\build\x64\vc16\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\output\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProgramFiles)\packages\opencv\build\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProgramFiles)\packages\pigpio;$(ProgramFiles)\packages\opencv\build\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProgramFiles)\packages\opencv\build\x64\vc16\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\output\</OutDir>
   </PropertyGroup>
