@@ -71,12 +71,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(ProgramFiles)\packages\opencv\build\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProgramFiles)\packages\sdbus-cpp\include;$(ProgramFiles)\packages\opencv\build\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProgramFiles)\packages\opencv\build\x64\vc16\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\output\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProgramFiles)\packages\opencv\build\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProgramFiles)\packages\sdbus-cpp\include;$(ProgramFiles)\packages\opencv\build\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProgramFiles)\packages\opencv\build\x64\vc16\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\output\</OutDir>
   </PropertyGroup>
@@ -150,6 +150,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="accelerator.cpp" />
+    <ClCompile Include="bluetooth.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="controller.cpp" />
     <ClCompile Include="frequence.cpp" />
@@ -172,6 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="accelerator.h" />
+    <ClInclude Include="bluetooth.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="controller.h" />
     <ClInclude Include="frequence.h" />

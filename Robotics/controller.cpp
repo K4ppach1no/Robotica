@@ -38,6 +38,10 @@ int main()
     camera camera_;
     Mat img;
 
+    bluetooth bluetooth_;
+
+    bluetooth_.connect();
+
     while(true)
     {
         camera_.get_image_from_camera(img);

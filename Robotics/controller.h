@@ -21,6 +21,7 @@
 #include "opencv.h"
 #include "frequence.h"
 #include "image_data.h"
+#include "bluetooth.h"
 
 class controller
 {
