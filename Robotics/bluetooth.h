@@ -7,7 +7,3 @@ public:
 	void connect();
 };
 
-class bluetooth
-{
-};
-
