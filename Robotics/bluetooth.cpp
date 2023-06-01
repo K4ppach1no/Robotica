@@ -29,7 +29,7 @@ void bluetooth::connect()
 	}
 
 
-	auto reply = sdbus_proxy->callMethod(sdbus_proxy->createMethodCall(interface_name, "StopDiscovery"));
+	sdbus_proxy->callMethod(sdbus_proxy->createMethodCall(interface_name, "StopDiscovery"));
 }
 
 
