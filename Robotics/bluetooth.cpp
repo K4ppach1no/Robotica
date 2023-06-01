@@ -15,9 +15,10 @@ void bluetooth::connect()
 	sdbus_proxy->finishRegistration();
 
 	std::cout << "start discovery\n";
-	const char* method_name = "StartDiscovery";
+	const char* method_name = "Garbage";
 	auto method = sdbus_proxy->createMethodCall(interface_name, method_name);
 	auto reply = sdbus_proxy->callMethod(method);
+	
 	
 
 	std::this_thread::sleep_for(std::chrono::seconds(5));
