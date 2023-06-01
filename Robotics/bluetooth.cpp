@@ -15,9 +15,8 @@ void bluetooth::connect()
 	sdbus_proxy->finishRegistration();
 
 	std::cout << "start discovery\n";
-	const char* method_name = "Garbage";
-	auto method = sdbus_proxy->createMethodCall(interface_name, method_name);
-	auto reply = sdbus_proxy->callMethod(method);
+
+	auto reply = sdbus_proxy->callMethod(sdbus_proxy->createMethodCall(interface_name, "StartDiscovery"));
 	
 	
 
@@ -29,6 +28,8 @@ void bluetooth::connect()
 		std::cout << "reply is empty\n";
 	}
 
+
+	auto reply = sdbus_proxy->callMethod(sdbus_proxy->createMethodCall(interface_name, "StopDiscovery"));
 }
 
 
