@@ -18,6 +18,9 @@ void bluetooth::connect()
 	const char* method_name = "StartDiscovery";
 	auto method = sdbus_proxy->createMethodCall(interface_name, method_name);
 	auto reply = sdbus_proxy->callMethod(method);
+	
+
+	std::this_thread::sleep_for(std::chrono::seconds(5));
 	if (!reply.isValid()) {
 		std::cout << "reply is invalid\n";
 	}
@@ -25,7 +28,6 @@ void bluetooth::connect()
 		std::cout << "reply is empty\n";
 	}
 
-	std::this_thread::sleep_for(std::chrono::seconds(5));
 }
 
 
