@@ -42,7 +42,7 @@ int main()
 
     bluetooth_.connect();
 
-    while(true)
+    /*while (true)
     {
         camera_.get_image_from_camera(img);
 
@@ -56,6 +56,6 @@ int main()
 
         if (waitKey(5) >= 0)
             break;
-    }
+    }*/
 
 }
