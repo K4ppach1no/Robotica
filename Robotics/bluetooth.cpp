@@ -17,6 +17,8 @@ void bluetooth::connect()
 	const char* method_name = "StartDiscovery";
 	auto method = sdbus_proxy->createMethodCall(interface_name, method_name);
 	sdbus_proxy->callMethod(method);
+
+	std::this_thread::sleep_for(std::chrono::seconds(5));
 }
 
 
