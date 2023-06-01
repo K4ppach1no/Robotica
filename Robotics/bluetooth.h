@@ -9,6 +9,7 @@ class bluetooth
 {
 public:
 	void connect();
+	void on_device_found();
+	void on_property_changed();
 };
 
-void onsignal_callback();

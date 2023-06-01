@@ -7,10 +7,10 @@ void bluetooth::connect()
 	const char* destination_name = "org.bluez";
 	const char* object_path = "/org/bluez/hci0";
 	const char* interface_name = "org.bluez.Adapter1";
-	auto callback_function = onsignal_callback;
 
 	auto sdbus_proxy = sdbus::createProxy(destination_name, object_path);
-	sdbus_proxy->uponSignal("DeviceFound").onInterface(interface_name).call(callback_function);
+	sdbus_proxy->uponSignal("DeviceFound").onInterface(interface_name).call(on_device_found);
+	sdbus_proxy->uponSignal("PropertyChanged").onInterface(interface_name).call(on_property_changed);
 	sdbus_proxy->finishRegistration();
 
 	
@@ -22,6 +22,10 @@ void bluetooth::connect()
 }
 
 
-void onsignal_callback() {
+void bluetooth::on_device_found() {
 	std::cout << "Device found!\n";
+}
+
+void bluetooth::on_property_changed() {
+	std::cout << "Property changed!\n";
 }
