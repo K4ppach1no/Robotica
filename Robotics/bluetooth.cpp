@@ -11,7 +11,9 @@ void bluetooth::connect()
 
 	auto sdbus_proxy = sdbus::createProxy(destination_name, object_path);
 	sdbus_proxy->uponSignal("DeviceFound").onInterface(interface_name).call(on_device_found);
+	sdbus_proxy->uponSignal("DeviceFound").call([]() {std::cout << "signal recieved\n"; });
 	sdbus_proxy->uponSignal("PropertyChanged").onInterface(interface_name).call(on_property_changed);
+	sdbus_proxy->uponSignal("PropertyChanged").call([]() {std::cout << "signal recieved\n"; });
 	sdbus_proxy->finishRegistration();
 
 	std::cout << "start discovery\n";
@@ -21,9 +23,11 @@ void bluetooth::connect()
 	
 
 	std::this_thread::sleep_for(std::chrono::seconds(5));
+	
 	if (!reply.isValid()) {
 		std::cout << "reply is invalid\n";
 	}
+
 	if (reply.isEmpty()) {
 		std::cout << "reply is empty\n";
 	}
