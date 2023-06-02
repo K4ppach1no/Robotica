@@ -1,0 +1,26 @@
+<annotation>
+	<folder>Camera Roll</folder>
+	<filename>IMG20230516092735.jpg</filename>
+	<path>C:\Users\Bard\Pictures\Camera Roll\IMG20230516092735.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>3468</width>
+		<height>4624</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>Box</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1141</xmin>
+			<ymin>1447</ymin>
+			<xmax>1777</xmax>
+			<ymax>2476</ymax>
+		</bndbox>
+	</object>
+</annotation>

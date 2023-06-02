@@ -130,5 +130,8 @@ add_package_exe "https://github.com/opencv/opencv/releases/download/4.7.0/opencv
 
 #use like this -> install_from_github_using_cmake "https://github.com/martinus/nanobench/archive/refs/tags/v4.3.11.zip" "nanobench"
 
+#install pugixml
+install_from_github_using_cmake "https://github.com/zeux/pugixml/releases/download/v1.13/pugixml-1.13.zip" "pugxml"
+
 rm nul
 echo "All done"
