@@ -15,7 +15,7 @@ namespace App
         public DateTime TimeRecieved { get; set;}
 
         public Message(string Text) {
-            this.Body = Text;
+            Body = Text;
             TimeRecieved = DateTime.Now;
         }
     }

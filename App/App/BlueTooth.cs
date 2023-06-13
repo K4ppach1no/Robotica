@@ -5,15 +5,16 @@ namespace App
 {
     public class BlueTooth
     {
-        private Queue<string> messageQueue = new Queue<string>();
-        private Action action;
-        private bool runServer = false;
+        private Queue<string> MessageQueue = new Queue<string>();
+        private Action Action;
+        private bool RunServer = false;
 
         /// <summary>
         /// Starts the Bluetooth server.
         /// </summary>
-        public void StartServer() {
-            runServer = true;
+        public void StartServer()
+        {
+            RunServer = true;
             Task task = Task.Run(Server);
         }
 
@@ -22,7 +23,7 @@ namespace App
         /// </summary>
         public void StopServer()
         {
-            runServer = false;
+            RunServer = false;
         }
 
         /// <summary>
@@ -32,10 +33,11 @@ namespace App
         /// <param name="action"></param>
         public void SetOnMessage(Action action)
         {
-            lock (action) {
-                this.action = action;
+            lock (action)
+            {
+                this.Action = action;
             }
-            
+
         }
 
         /// <summary>
@@ -45,11 +47,11 @@ namespace App
         /// <returns>a string containing the bluetooth message</returns>
         public string GetMessage()
         {
-            lock (messageQueue)
+            lock (MessageQueue)
             {
-                if (messageQueue.Count != 0)
+                if (MessageQueue.Count != 0)
                 {
-                    return messageQueue.Dequeue();
+                    return MessageQueue.Dequeue();
                 }
 
                 return null;
@@ -61,42 +63,56 @@ namespace App
         /// </summary>
         private void Server()
         {
-        BluetoothListener listener = new BluetoothListener(BluetoothService.SerialPort);
-        string guid = BluetoothService.SerialPort.ToString();
+            BluetoothListener listener = new BluetoothListener(BluetoothService.SerialPort);
+            string guid = BluetoothService.SerialPort.ToString();
 
-        listener.ServiceName = "APP";
+            System.Diagnostics.Debug.WriteLine("starting bluetooth listener service");
+            listener.ServiceName = "APP";
             listener.Start();
 
             while (true)
             {
+                System.Diagnostics.Debug.WriteLine("waiting for client to connect");
                 var client = listener.AcceptBluetoothClient();
-               
+
                 var stream = client.GetStream();
                 StreamReader sr = new StreamReader(stream, System.Text.Encoding.UTF8);
+                
+
                 while (client.Connected)
                 {
-                    
+                    System.Diagnostics.Debug.WriteLine("client.client.Connected: " + client.Client.Connected);
+                    System.Diagnostics.Debug.WriteLine("remote machine name: " + client.RemoteMachineName);
+                    System.Diagnostics.Debug.WriteLine("client info dump: \n" + client.ToString());
                     var line = sr.ReadLine();
-                    if (line == null) continue;
-                    
-                    lock (messageQueue)
+
+                    if (line == null) { System.Diagnostics.Debug.WriteLine("No data to read"); continue; }
+
+                    System.Diagnostics.Debug.WriteLine("line" + line);
+
+                    lock (MessageQueue)
                     {
-                        messageQueue.Enqueue(line);
+                        System.Diagnostics.Debug.WriteLine("enqueueing line");
+                        MessageQueue.Enqueue(line);
                     }
 
-                    if (action == null) continue;
-                    
-                    lock (action)
+                    if (Action == null) continue;
+
+                    lock (Action)
                     {
-                        MainThread.InvokeOnMainThreadAsync(action);
+                        System.Diagnostics.Debug.WriteLine("Calling callback actions");
+                        MainThread.InvokeOnMainThreadAsync(Action);
                     }
                 }
 
-                if (!runServer)
+                if (!RunServer)
                 {
+                    System.Diagnostics.Debug.WriteLine("Shutting down server");
                     return;
                 }
             }
         }
+
+        // end of server class
     }
 }

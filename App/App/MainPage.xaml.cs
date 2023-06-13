@@ -7,7 +7,6 @@ namespace App
     {
         public ObservableCollection<Message> messages = new();
 
-
         public MainPage()
         {
             InitializeComponent();

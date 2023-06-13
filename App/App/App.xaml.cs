@@ -12,8 +12,6 @@
             //We want to start the bluetooth server as soon as the app starts
             bluetooth.StartServer();
             
-
-            
         }
     }
 }
